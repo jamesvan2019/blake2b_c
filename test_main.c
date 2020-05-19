@@ -128,7 +128,21 @@ int main(int argc, char **argv)
          blake2b_selftest() ? "FAIL" : "OK");
     printf("blake2s_selftest() = %s\n",
          blake2s_selftest() ? "FAIL" : "OK");
-
+    uint8_t md[32];
+    char *s = "helloworld";
+    blake2b_ctx ctx;
+    blake2b(md, 32, NULL, 0, s, 10);
+    for(int j=0;j<32;j++)
+    {
+    	printf("%02x",md[j]); //output 3c228306552177f5a304cb12a5b5e60897f2f486b64671afdccf0f8dd9410cbd
+    }
+    //double 
+    blake2b(md, 32, NULL, 0, md, 32);
+    printf("\n");
+    for(int j=0;j<32;j++)
+    {
+    	printf("%02x",md[j]); //output 9217a895687fc548dcffa894bbf697010e53b1996cda9af81fd2b212fd22030f
+    }
     return 0;
 }
 
